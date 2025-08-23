@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'app_name' => '{{APP_NAME}}',
+    'site_title' => '{{SITE_TITLE}}',
+    'view_template' => '{{VIEW_TEMPLATE}}',
+    'theme_color' => '{{THEME_COLOR}}'
+];

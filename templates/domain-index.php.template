@@ -1,0 +1,12 @@
+<?php
+
+// Загружаем конфигурацию домена
+$domainConfig = require __DIR__ . '/config.php';
+
+// Устанавливаем переменные окружения для Larabus
+foreach ($domainConfig as $key => $value) {
+    $_ENV['DOMAIN_' . strtoupper($key)] = $value;
+}
+
+// Подключаем Larabus фреймворк
+require __DIR__ . '/../Larabus/public/index.php';
