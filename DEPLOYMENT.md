@@ -16,7 +16,7 @@ This guide explains how to deploy Larabus framework to various hosting environme
 
 ```bash
 # Option A: Git clone (if Git available)
-git clone https://github.com/Kalmanis/Larabus.git
+git clone https://github.com/Kalmanil/Larabus.git
 cd Larabus
 composer install --no-dev --optimize-autoloader
 
@@ -76,7 +76,7 @@ sudo yum install nginx php82-fpm php82-mbstring php82-xml php82-mysql composer g
 
 ```bash
 cd /var/www
-sudo git clone https://github.com/Kalmanis/Larabus.git
+sudo git clone https://github.com/Kalmanil/Larabus.git
 cd Larabus
 sudo composer install --no-dev --optimize-autoloader
 sudo php install.php
@@ -263,7 +263,7 @@ CREATE INDEX idx_created_at ON logs(created_at);
 
 ```bash
 # Deploy Larabus
-git clone https://github.com/Kalmanis/Larabus.git
+git clone https://github.com/Kalmanil/Larabus.git
 cd Larabus
 composer install --no-dev
 
@@ -316,9 +316,9 @@ mv ../portfolio.com /var/www/domains/
 
 ## 📞 **Support**
 
-- 📖 **Documentation**: [GitHub Wiki](https://github.com/Kalmanis/Larabus/wiki)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Kalmanis/Larabus/issues)
-- 💬 **Community**: [Discussions](https://github.com/Kalmanis/Larabus/discussions)
+- 📖 **Documentation**: [GitHub Wiki](https://github.com/Kalmanil/Larabus/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Kalmanil/Larabus/issues)
+- 💬 **Community**: [Discussions](https://github.com/Kalmanil/Larabus/discussions)
 
 ---
 

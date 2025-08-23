@@ -30,14 +30,14 @@ Larabus is a Laravel-based framework that allows you to manage multiple websites
 ### Option 1: Composer (Recommended)
 
 ```bash
-composer create-project kalmanis/larabus my-project
+composer create-project kalmanil/larabus my-project
 cd my-project
 ```
 
 ### Option 2: Git Clone
 
 ```bash
-git clone https://github.com/Kalmanis/Larabus.git
+git clone https://github.com/Kalmanil/Larabus.git
 cd Larabus
 composer install
 cp .env.example .env
@@ -196,7 +196,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 **Author**
 
-**Kalmanis** - [GitHub](https://github.com/Kalmanis)
+**Kalmanil** - [GitHub](https://github.com/Kalmanil)
 
 ---
 
