@@ -16,8 +16,8 @@ This guide explains how to deploy Larabus framework to various hosting environme
 
 ```bash
 # Option A: Git clone (if Git available)
-git clone https://github.com/Kalmanil/Larabus.git
-cd Larabus
+git clone https://github.com/kalmanil/larabus.git
+cd larabus
 composer install --no-dev --optimize-autoloader
 
 # Option B: Download and upload via FTP
@@ -28,18 +28,18 @@ composer install --no-dev --optimize-autoloader
 
 ```
 your-hosting-account/
-├── 📁 Larabus/                    # Outside public_html (secure)
+├── 📁 larabus/                    # Outside public_html (secure)
 │   ├── apps/
 │   ├── vendor/
 │   └── [framework files]
 └── 📁 public_html/
     ├── 📁 domain1.com/            # Each domain gets folder
     │   ├── config.php
-    │   ├── index.php → ../Larabus/
+    │   ├── index.php → ../larabus/
     │   └── .htaccess
     └── 📁 domain2.com/
         ├── config.php  
-        ├── index.php → ../Larabus/
+        ├── index.php → ../larabus/
         └── .htaccess
 ```
 
@@ -47,7 +47,7 @@ your-hosting-account/
 
 ```bash
 # Using the built-in script
-php Larabus/create-domain.php mydomain.com myapp "My Website" "#3b82f6"
+php larabus/create-domain.php mydomain.com myapp "My Website" "#3b82f6"
 
 # Or manually create:
 mkdir public_html/mydomain.com
@@ -76,8 +76,8 @@ sudo yum install nginx php82-fpm php82-mbstring php82-xml php82-mysql composer g
 
 ```bash
 cd /var/www
-sudo git clone https://github.com/Kalmanil/Larabus.git
-cd Larabus
+sudo git clone https://github.com/kalmanil/larabus.git
+cd larabus
 sudo composer install --no-dev --optimize-autoloader
 sudo php install.php
 ```
@@ -114,7 +114,7 @@ server {
 
 ```bash
 sudo mkdir -p /var/www/domains/domain1.com
-sudo php /var/www/Larabus/create-domain.php domain1.com myapp "My Site"
+sudo php /var/www/larabus/create-domain.php domain1.com myapp "My Site"
 sudo mv ../domain1.com/* /var/www/domains/domain1.com/
 sudo chown -R www-data:www-data /var/www/domains/domain1.com
 ```
@@ -186,10 +186,10 @@ DB_PASSWORD=strong_password
 
 ```bash
 # Set correct permissions
-sudo chown -R www-data:www-data /var/www/Larabus
-sudo chmod -R 755 /var/www/Larabus/storage
-sudo chmod -R 755 /var/www/Larabus/bootstrap/cache
-sudo chmod 644 /var/www/Larabus/.env
+sudo chown -R www-data:www-data /var/www/larabus
+sudo chmod -R 755 /var/www/larabus/storage
+sudo chmod -R 755 /var/www/larabus/bootstrap/cache
+sudo chmod 644 /var/www/larabus/.env
 ```
 
 ### 2. Hide Sensitive Files
@@ -263,8 +263,8 @@ CREATE INDEX idx_created_at ON logs(created_at);
 
 ```bash
 # Deploy Larabus
-git clone https://github.com/Kalmanil/Larabus.git
-cd Larabus
+git clone https://github.com/kalmanil/larabus.git
+cd larabus
 composer install --no-dev
 
 # Create domains
@@ -316,9 +316,9 @@ mv ../portfolio.com /var/www/domains/
 
 ## 📞 **Support**
 
-- 📖 **Documentation**: [GitHub Wiki](https://github.com/Kalmanil/Larabus/wiki)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Kalmanil/Larabus/issues)
-- 💬 **Community**: [Discussions](https://github.com/Kalmanil/Larabus/discussions)
+- 📖 **Documentation**: [GitHub Wiki](https://github.com/kalmanil/larabus/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/kalmanil/larabus/issues)
+- 💬 **Community**: [Discussions](https://github.com/kalmanil/larabus/discussions)
 
 ---
 

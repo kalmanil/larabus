@@ -37,8 +37,8 @@ cd my-project
 ### Option 2: Git Clone
 
 ```bash
-git clone https://github.com/Kalmanil/Larabus.git
-cd Larabus
+git clone https://github.com/kalmanil/larabus.git
+cd larabus
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -49,7 +49,7 @@ php artisan migrate
 
 ```
 your-hosting/
-├── 🚍 Larabus/                    # Central framework (deploy once)
+├── 🚍 larabus/                    # Central framework (deploy once)
 │   ├── apps/                      # All application code
 │   │   ├── site1/
 │   │   │   ├── routes.php
@@ -60,7 +60,7 @@ your-hosting/
 │   └── [standard Laravel structure]
 ├── 🌐 domain1.com/                # Minimal domain folder
 │   ├── config.php                 # Domain configuration
-│   ├── index.php                  # Entry point → Larabus
+│   ├── index.php                  # Entry point → larabus
 │   └── .htaccess                  # URL rewriting
 └── 🌐 domain2.com/                # Another domain
     ├── config.php
@@ -82,13 +82,13 @@ your-hosting/
 
 ### 1. Create App Structure
 ```bash
-mkdir Larabus/apps/mynewsite
-mkdir Larabus/apps/mynewsite/resources/views
+mkdir larabus/apps/mynewsite
+mkdir larabus/apps/mynewsite/resources/views
 ```
 
 ### 2. Add Routes
 ```php
-<?php // Larabus/apps/mynewsite/routes.php
+<?php // larabus/apps/mynewsite/routes.php
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
@@ -119,14 +119,14 @@ $domainConfig = require __DIR__ . '/config.php';
 foreach ($domainConfig as $key => $value) {
     $_ENV['DOMAIN_' . strtoupper($key)] = $value;
 }
-require __DIR__ . '/../Larabus/public/index.php';
+require __DIR__ . '/../larabus/public/index.php';
 ```
 
 ## 🌐 **Deployment Guide**
 
 ### Shared Hosting Setup
 
-1. **Upload Larabus** to your hosting account (outside public_html)
+1. **Upload larabus** to your hosting account (outside public_html)
 2. **Create domain folders** in public_html for each domain:
    ```
    public_html/
@@ -144,7 +144,7 @@ require __DIR__ . '/../Larabus/public/index.php';
 
 ### VPS/Dedicated Server
 
-1. **Clone/deploy** Larabus to `/var/www/larabus/`
+1. **Clone/deploy** larabus to `/var/www/larabus/`
 2. **Create virtual hosts** for each domain pointing to domain folders
 3. **Configure Nginx/Apache** with proper document roots
 4. **Set up SSL** certificates for each domain
@@ -155,8 +155,8 @@ require __DIR__ . '/../Larabus/public/index.php';
 
 ```bash
 # In your Laravel project
-composer config repositories.larabus path "../Larabus"
-composer require "kalmanis/larabus:dev-main"
+composer config repositories.larabus path "../larabus"
+composer require "kalmanil/larabus:dev-main"
 ```
 
 ### Publishing to Packagist
@@ -196,7 +196,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 **Author**
 
-**Kalmanil** - [GitHub](https://github.com/Kalmanil)
+**Kalmanil** - [GitHub](https://github.com/kalmanil)
 
 ---
 

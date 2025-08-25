@@ -4,7 +4,18 @@
     "type": "library",
     "description": "Larabus Framework - Laravel-based multi-app framework",
     "keywords": ["laravel", "framework", "multi-app", "larabus"],
+    "homepage": "https://github.com/kalmanil/larabus",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/kalmanil/larabus/issues",
+        "source": "https://github.com/kalmanil/larabus"
+    },
+    "authors": [
+        {
+            "name": "Kalmanil",
+            "homepage": "https://github.com/kalmanil"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
