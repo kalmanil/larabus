@@ -102,6 +102,16 @@ phpunit.xml
 .nyc_output
 
 # Larabus Specific
+
+# Ignore everything in apps
+/apps/*
+
+# Keep only site1 and site2 (with all nested contents)
+!/apps/site1/
+!/apps/site1/**
+!/apps/site2/
+!/apps/site2/**
+
 # Domain folders (these should be created manually)
 /site*/
 /domain*/
