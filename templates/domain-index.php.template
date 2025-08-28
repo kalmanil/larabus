@@ -5,8 +5,17 @@ $domainConfig = require __DIR__ . '/config.php';
 
 // Устанавливаем переменные окружения для Larabus
 foreach ($domainConfig as $key => $value) {
-    $_ENV['DOMAIN_' . strtoupper($key)] = $value;
+    if ($key === 'db_connections' && is_array($value)) {
+        // Специальная обработка для конфигурации баз данных
+        foreach ($value as $connectionName => $connectionConfig) {
+            foreach ($connectionConfig as $paramName => $paramValue) {
+                $_ENV['DOMAIN_DB_CONNECTIONS_' . strtoupper($connectionName) . '_' . strtoupper($paramName)] = $paramValue;
+            }
+        }
+    } else {
+        $_ENV['DOMAIN_' . strtoupper($key)] = $value;
+    }
 }
 
 // Подключаем Larabus фреймворк
-require __DIR__ . '/../Larabus/public/index.php';
+require __DIR__ . '/../larabus/public/index.php';

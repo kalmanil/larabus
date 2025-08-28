@@ -1,8 +1,38 @@
 <?php
 
+$appName = '{{APP_NAME}}';
+
 return [
-    'app_name' => '{{APP_NAME}}',
+    'app_name' => $appName,
     'site_title' => '{{SITE_TITLE}}',
-    'view_template' => '{{VIEW_TEMPLATE}}',
-    'theme_color' => '{{THEME_COLOR}}'
+    'view_template' => $appName . '.welcome',
+    'theme_color' => '{{THEME_COLOR}}',
+    
+    // Database configuration for this app
+    'db_domain_default' => 'app_mysql', // This app's default connection for app data
+    'db_connections' => [
+        'app_mysql' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => '3306',
+            'database' => '{{APP_NAME}}_db',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+        'app_sqlite' => [
+            'driver' => 'sqlite',
+            'database' => __DIR__ . '/../larabus/apps/' . $appName . '/database/database.sqlite',
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ],
+        // Add more connections as needed
+        // 'app_pgsql' => [...],
+        // 'app_redis' => [...],
+    ]
 ];
