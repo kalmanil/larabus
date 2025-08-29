@@ -36,7 +36,10 @@
             "Larabus\\": "src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "classmap": [
+            "apps/*/Models/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

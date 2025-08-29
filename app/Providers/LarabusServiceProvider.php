@@ -18,15 +18,21 @@ class LarabusServiceProvider extends ServiceProvider
     {
         // Загружаем конфигурацию из переменных окружения (установленных в index.php)
         $appName = $_ENV['DOMAIN_APP_NAME'] ?? 'site1';
+        $isBuiltin = $_ENV['DOMAIN_IS_BUILTIN'] ?? false;
+        $builtinPath = $_ENV['DOMAIN_BUILTIN_PATH'] ?? null;
 
         // Настраиваем базы данных для приложения
         $this->configureDatabases($appName);
 
-        // Добавляем пути к views из apps
-        $this->loadAppViews($appName);
-
-        // Загружаем маршруты из apps
-        $this->loadAppRoutes($appName);
+        if ($isBuiltin && $builtinPath) {
+            // Load built-in app from core Larabus structure
+            $this->loadBuiltinApp($builtinPath);
+        } else {
+            // Load regular app from apps folder
+            $this->loadAppModels($appName);
+            $this->loadAppViews($appName);
+            $this->loadAppRoutes($appName);
+        }
     }
 
     private function loadAppRoutes($appName)
@@ -44,6 +50,79 @@ class LarabusServiceProvider extends ServiceProvider
 
         if (is_dir($viewsPath)) {
             View::addLocation($viewsPath);
+        }
+    }
+
+    private function loadBuiltinApp($builtinPath)
+    {
+        // Load built-in app from core Larabus structure (e.g., app/Admin)
+        $basePath = base_path($builtinPath);
+        
+        // Load models
+        $modelsPath = $basePath . '/Models';
+        if (is_dir($modelsPath)) {
+            $modelFiles = glob($modelsPath . '/*.php');
+            foreach ($modelFiles as $modelFile) {
+                require_once $modelFile;
+                $className = pathinfo($modelFile, PATHINFO_FILENAME);
+                error_log("LarabusServiceProvider: Loaded built-in model: {$className} from {$modelFile}");
+            }
+            error_log("LarabusServiceProvider: Loaded " . count($modelFiles) . " built-in models from {$modelsPath}");
+        }
+        
+        // Load views - for built-in admin, we need to add the views to the main views directory
+        $viewsPath = $basePath . '/resources/views';
+        if (is_dir($viewsPath)) {
+            // For built-in admin, copy views to the main resources/views directory
+            $mainViewsPath = base_path('resources/views');
+            $adminViewsPath = $mainViewsPath . '/admin';
+            
+            // Create admin views directory if it doesn't exist
+            if (!is_dir($adminViewsPath)) {
+                mkdir($adminViewsPath, 0755, true);
+            }
+            
+            // Copy admin views to main views directory
+            $this->copyDirectory($viewsPath, $adminViewsPath);
+            error_log("LarabusServiceProvider: Copied built-in admin views to: {$adminViewsPath}");
+        }
+        
+        // Load routes
+        $routesPath = $basePath . '/routes.php';
+        if (file_exists($routesPath)) {
+            require $routesPath;
+            error_log("LarabusServiceProvider: Loaded built-in routes from: {$routesPath}");
+        }
+        
+        // Load services
+        $servicesPath = $basePath . '/Services';
+        if (is_dir($servicesPath)) {
+            $serviceFiles = glob($servicesPath . '/*.php');
+            foreach ($serviceFiles as $serviceFile) {
+                require_once $serviceFile;
+                $className = pathinfo($serviceFile, PATHINFO_FILENAME);
+                error_log("LarabusServiceProvider: Loaded built-in service: {$className} from {$serviceFile}");
+            }
+        }
+    }
+
+    private function loadAppModels($appName)
+    {
+        $modelsPath = base_path("apps/{$appName}/Models");
+
+        if (is_dir($modelsPath)) {
+            // Manually include model files to make them available
+            // This is a workaround when composer autoloader is not available
+            $modelFiles = glob($modelsPath . '/*.php');
+            
+            foreach ($modelFiles as $modelFile) {
+                // Include the model file to make the class available
+                require_once $modelFile;
+                $className = pathinfo($modelFile, PATHINFO_FILENAME);
+                error_log("LarabusServiceProvider: Loaded model: {$className} from {$modelFile}");
+            }
+            
+            error_log("LarabusServiceProvider: Loaded " . count($modelFiles) . " models from {$modelsPath}");
         }
     }
 
@@ -117,5 +196,30 @@ class LarabusServiceProvider extends ServiceProvider
         
         error_log("LarabusServiceProvider: Final connections: " . json_encode(array_keys($connections)));
         return $connections;
+    }
+    
+    /**
+     * Copy directory recursively
+     */
+    private function copyDirectory($source, $destination)
+    {
+        if (!is_dir($destination)) {
+            mkdir($destination, 0755, true);
+        }
+        
+        $dir = opendir($source);
+        while (($file = readdir($dir)) !== false) {
+            if ($file != '.' && $file != '..') {
+                $sourcePath = $source . '/' . $file;
+                $destPath = $destination . '/' . $file;
+                
+                if (is_dir($sourcePath)) {
+                    $this->copyDirectory($sourcePath, $destPath);
+                } else {
+                    copy($sourcePath, $destPath);
+                }
+            }
+        }
+        closedir($dir);
     }
 }
